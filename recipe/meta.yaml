@@ -1,3 +1,4 @@
+{% set python_min = "3.8" %}
 {% set name = "fastclasses-json" %}
 {% set version = "0.8.0" %}
 
@@ -6,22 +7,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
   sha256: 4f06cd559a4e752e31c0ae04622d1c7abb5a66fa53b550c262d6de49082225a0
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools
     - wheel
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - typing-extensions
 
 test:
@@ -29,8 +30,13 @@ test:
     - fastclasses_json
   commands:
     - pip check
+    - pytest
+  source_files:
+    - .
   requires:
     - pip
+    - python {{ python_min }}
+    - pytest
 
 about:
   home: https://github.com/cakemanny/fastclasses-json

@@ -1,3 +1,4 @@
+{% set python_min = "3.8" %}
 {% set name = "fastclasses-json" %}
 {% set version = "0.8.0" %}
 
@@ -29,9 +30,13 @@ test:
     - fastclasses_json
   commands:
     - pip check
+    - pytest
+  source_files:
+    - .
   requires:
     - pip
     - python {{ python_min }}
+    - pytest
 
 about:
   home: https://github.com/cakemanny/fastclasses-json

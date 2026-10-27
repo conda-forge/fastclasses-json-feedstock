@@ -1,19 +1,19 @@
 {% set python_min = "3.8" %}
 {% set name = "fastclasses-json" %}
-{% set version = "0.8.0" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 4f06cd559a4e752e31c0ae04622d1c7abb5a66fa53b550c262d6de49082225a0
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 2a80a8e4ced7868718277b76f399d050ed6c1e1c17210ba624db3766ae83c850
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  number: 0
 
 requirements:
   host:

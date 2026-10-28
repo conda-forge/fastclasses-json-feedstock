@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  version: "0.9.0"
+
+package:
+  name: fastclasses-json
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/f/fastclasses-json/fastclasses_json-${{ version }}.tar.gz
+  sha256: 2a80a8e4ced7868718277b76f399d050ed6c1e1c17210ba624db3766ae83c850
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - fastclasses_json
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pytest
+    script:
+      - pytest
+
+about:
+  homepage: https://github.com/cakemanny/fastclasses-json
+  summary: Quickly serialize dataclasses to and from JSON
+  license: MIT
+  license_file: LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - julian-belina
